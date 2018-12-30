@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jieming.dao.TypeMapper">
+
+    <resultMap id="tmap" type="Type">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getBydId" resultMap="tmap" >
+        SELECT * FROM  types WHERE  id = #{id}
+    </select>
+
+
+</mapper>

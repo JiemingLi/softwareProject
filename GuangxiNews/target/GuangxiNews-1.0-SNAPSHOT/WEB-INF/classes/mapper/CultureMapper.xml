@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jieming.dao.CultureMapper">
+
+    <resultMap id="map" type="Culture">
+        <id property="id" column="id" />
+        <result property="title" column="title"/>
+        <result property="subTitle" column="sub_title"/>
+        <result property="listDate" column="list_date"/>
+        <result property="type" column="type"/>
+        <result property="contents" column="contents"/>
+        <result property="href" column="href"/>
+        <association property="category" column="type" select="com.jieming.dao.TypeMapper.getBydId">
+
+        </association>
+    </resultMap>
+
+    <select id = "getAll" resultMap="map">
+        SELECT * FROM culture
+    </select>
+
+    <select id="getNewsByCategories" resultMap="map" >
+       SELECT * FROM culture where type = #{id}
+    </select>
+
+    <select id="getContentsById" resultMap = "map">
+        SELECT * FROM  culture WHERE id = #{id}
+    </select>
+
+    <select id="getNewsByTitleKeyWord" resultMap="map" parameterType="java.lang.String">
+        SELECT * FROM culture WHERE  title LIKE CONCAT('%',#{keyword},'%')
+    </select>
+
+</mapper>
